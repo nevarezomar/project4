@@ -12,8 +12,5 @@ def home():
 def name(name):
     return render_template("index.html", content=["tim", "omar", "bob"])
 
-# EB looks for an 'application' callable by default.
-application = Flask(__name__)
-
 if __name__ == "__main__":
         application.run(debug=True)
