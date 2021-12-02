@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+          rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous"
+        />
+        <link
+          rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          crossorigin="anonymous"
+        />
+        <title>Input Page</title>
+    </head>
+    <body>
+        <h1>
+            Input Page!
+        </h1>
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+            messages %} {% for category, message in messages %} {% if category ==
+            'error' %}
+            <div class="alert alert-danger alter-dismissable fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% elif category == 'load' %}
+            <div class="alert alert-primary alter-dismissable fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% elif category == 'clear' %}
+            <div class="alert alert-warning alter-dismissable fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% else %}
+            <div class="alert alert-success alter-dismissable fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+        {% endif %} {% endfor %} {% endif %} {% endwith %}
+        {% block content %}
+        <form action="#" method="post">
+            <div class="w-25 p-3">
+                <label for="fname">First Name:</label>
+                <input
+                    type="text"
+                    class="shadow form-control form-control-lg"
+                    id="fname"
+                    name="fname"
+                    placeholder="Enter First Name" 
+                />
+            </div>
+            <div class=" w-25 p-3">
+                <label for="lname">Last Name:</label>
+                <input
+                    type="text"
+                    class="shadow form-control form-control-lg"
+                    id="lname"
+                    name="lname"
+                    placeholder="Enter Last Name" 
+                />
+
+            </div>
+            <div class="px-3 py-1">
+                <button type = "submit" name="query" class="btn btn-outline-primary btn-lg shadow">Query</button>
+            </div>
+            <div class="px-3 py-1">
+                <button type = "submit" name="load" class="btn btn-outline-secondary btn-lg shadow">Load Data</button>
+            </div>
+            <div class="px-3 py-1">
+                <button type = "submit" name="clear" class="btn btn-outline-danger btn-lg shadow">Clear Data</button>
+            </div>
+            <div>
+              <table class="table m-3 table-bordered table-light table-striped table-sm w-50">
+                <thead class="table-dark">
+                <!-- table header -->
+                {% if results %}
+                <tr>
+                   {% for key in results[0] %}
+                   <th> {{ key }} </th>
+                   {% endfor %}
+                </tr>
+                {% else %}
+                <tr>
+                  <th>  No results found!  </th>
+               </tr>
+                {% endif %}
+              </thead>
+                <!-- table rows -->
+                {% for dict_item in results %}
+                <tr>
+                   {% for value in dict_item.values() %}
+                   <td> {{ value }} </td>
+                   {% endfor %}
+                </tr>
+                {% endfor %}
+              </table>
+            </div>
+        </form>
+        {% endblock %}
+    </body>
+</html>
