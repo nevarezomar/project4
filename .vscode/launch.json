@@ -1,6 +1,21 @@
 {
     "configurations": [
         {
+            "name": "Python: Flask",
+            "type": "python",
+            "request": "launch",
+            "module": "flask",
+            "env": {
+                "FLASK_APP": "application.py",
+                "FLASK_ENV": "development"
+            },
+            "args": [
+                "run",
+                "--no-debugger"
+            ],
+            "jinja": true
+        },
+        {
             "type": "aws-sam",
             "request": "direct-invoke",
             "name": "CSS346-Website:application.home (python3.8)",

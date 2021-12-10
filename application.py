@@ -185,4 +185,4 @@ def input():
         return render_template("input.html")
 
 if __name__ == "__main__":
-        application.run(debug=True)
+        application.run()
